@@ -1,0 +1,15 @@
+version: '3'
+services:
+  php_apache:
+    container_name: AirlinesInterview
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: "php -S 0.0.0.0:8000 -t ./public"
+    volumes:
+        - ./:/usr/src/app
+        - /usr/src/app/vendor/
+    ports:
+      - 8000:8000
+    networks:
+      - default
