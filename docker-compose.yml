@@ -1,15 +1,31 @@
 version: '3'
 services:
-  php_apache:
-    container_name: AirlinesInterview
+  app: 
     build:
       context: ./
       dockerfile: Dockerfile
-    command: "php -S 0.0.0.0:8000 -t ./public"
+      args:
+        php_version: ${PHP_VERSION}
     volumes:
         - ./:/usr/src/app
         - /usr/src/app/vendor/
-    ports:
-      - 8000:8000
     networks:
       - default
+    depends_on:
+      - app-redis
+
+  app-nginx:
+    image: nginx:latest
+    restart: always
+    ports: 
+      - "${PUBLIC_PORT}:80"
+    volumes:
+      - ./:/usr/src/app
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - app
+
+  app-redis: 
+    image: redis
+    expose:
+      - 6300
