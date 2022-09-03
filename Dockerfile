@@ -19,12 +19,17 @@ RUN docker-php-ext-install zip
 # INSTALL AND UPDATE COMPOSER
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer self-update
-WORKDIR /usr/src/app
+WORKDIR /var/www/html
 COPY . .
+COPY .htaccess .
 
 # SET WORKDIR PERMISSION
-RUN chown -R www-data:www-data /usr/src/app
-RUN chmod 755 /usr/src/app
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod 755 /var/www/html 
+  
+
+
 
 # INSTALL YOUR DEPENDENCIES
 RUN composer install 
+  

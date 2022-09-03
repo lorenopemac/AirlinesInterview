@@ -10,12 +10,10 @@ services:
       args:
         php_version: ${PHP_VERSION}
     volumes:
-        - ./:/usr/src/app
-        - /usr/src/app/vendor/
+        - ./:/var/www/html 
+        - /var/www/html/vendor/  
     networks:
-      - backend
-    links:
-      - app-redis
+      - backend  
     depends_on:
       - app-redis
 
@@ -25,7 +23,7 @@ services:
     ports: 
       - "${PUBLIC_PORT}:80"
     volumes:
-      - ./:/usr/src/app
+      - ./:/var/www/html 
       - ./default.conf:/etc/nginx/conf.d/default.conf
     links:
       - app
