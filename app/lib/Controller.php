@@ -1,8 +1,8 @@
 <?php
 
 namespace App\lib;
-
-use App\lib\View;
+ 
+use App\lib\Controller;
 
 class Controller{
     private View $view;
@@ -15,7 +15,7 @@ class Controller{
     /**
      * Render an specific view by name 
      */
-    protected function render(string $name, array $data = [])
+    public function render(string $name, array $data = [])
     {
         $this->view->render($name,$data);   
     }
@@ -25,11 +25,11 @@ class Controller{
      */
     protected function post(string $params)
     {
-        if(!isset($POST[$param]))
+        if(!isset($POST[$params]))
         {
             return null;
         }else{
-            return $POST[$param];
+            return $POST[$params];
         } 
     }
 
@@ -38,11 +38,11 @@ class Controller{
      */
     protected function get(string $params)
     {
-        if(!isset($GET[$param]))
+        if(!isset($GET[$params]))
         {
             return null;
         }else{
-            return $GET[$param];
+            return $GET[$params];
         } 
     }
 

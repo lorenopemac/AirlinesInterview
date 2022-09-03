@@ -6,11 +6,41 @@ ini_set('display_errors', TRUE); // Error/Exception display, use FALSE only in p
 ini_set('log_errors', TRUE); // Error/Exception file logging engine.
 ini_set('error_log', 'php-error.log');
 
-require '../vendor/autoload.php';
-require '../app/lib/routes.php';
+require './vendor/autoload.php'; 
+require './app/lib/routes.php';
+/*
+echo 'ola';
+
+
+$url = 'https://beta.id90travel.com/session.json';
+$data = array("username" => "f9user","password" => "123456","remember_me"=>"1");
+
+$postdata = json_encode($data);
+
+$ch = curl_init($url); 
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+$result = curl_exec($ch);
+curl_close($ch);
+echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
+echo !curl_errno($ch);
+//print_r ($result);
+
+
+
+
+
+/*
+use App\App;
+
+$app = new App();
+//echo "HOLA INDEX";
+//require '../app/lib/routes.php';
 //require_once '../app/User.php'; 
  
-use App\User;  
+/*use App\User;  
 $asd = new App\User;
 echo($asd->hola());
 /*
@@ -31,44 +61,3 @@ echo var_dump(json_decode($response));
 $client = new Predis\Client(array('host' => '127.0.0.1', 'port' => 6300), array('prefix' => 'php:'));
 $client->set("string:my_key", "Hello World");
 $client->get("string:my_key");*/
-?>
-
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-    <title>LOGIN</title>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-</head>
-
-<body>
-
-     <form action="login.php" method="post">
-
-        <h2>LOGIN</h2>
-
-        <?php if (isset($_GET['error'])) { ?>
-
-            <p class="error"><?php echo $_GET['error']; ?></p>
-
-        <?php } ?>
-
-        <label>User Name</label>
-
-        <input type="text" name="uname" placeholder="User Name"><br>
-
-        <label>Password</label>
-
-        <input type="password" name="password" placeholder="Password"><br> 
-
-        <button type="submit">Login</button>
-
-     </form>
-
-</body>
-
-</html>
