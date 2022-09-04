@@ -1,11 +1,11 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\controllers;
 
 use App\lib\Controller;
 use App\models\User;
 
-class LoginController extends Controller{
+class AuthController extends Controller{
  
 
     public function __construct(){
@@ -15,7 +15,7 @@ class LoginController extends Controller{
     /**
      * render login view with airlines 
      */
-    public function login()
+    public function login() : void
     {
         $url = "https://beta.id90travel.com/airlines";
         $curl = curl_init($url);
@@ -30,7 +30,7 @@ class LoginController extends Controller{
     /**
      * 
      */
-    public function auth()
+    public function auth() : void
     { 
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -39,14 +39,12 @@ class LoginController extends Controller{
 
         
         if(!is_null($username) && !is_null($password) && !is_null($airline) && !is_null($remember_me))
-        {
-            //$data = array("username" => "f9user","password" => "123456","remember_me"=>"1");
+        { 
             $data = array("username" => $username,"password" => $password,"airline" => $airline,"remember_me" => $remember_me);
             $user = User::get($data);
             if($user){
                 
-                $_SESSION['user'] = serialize($user);
-                //print_r(var_dump($remember_me));
+                $_SESSION['user'] = serialize($user); 
                 header('location: /home');
             }else{
                 error_log('User not exist');

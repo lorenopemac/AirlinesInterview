@@ -1,11 +1,11 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\lib;
 // Require composer autoloader
 require './vendor/autoload.php';
 
 //Controllers
-use App\controllers\LoginController;
+use App\controllers\AuthController;
 use App\controllers\HomeController;
 use App\controllers\BookingController;
 
@@ -38,14 +38,14 @@ $router->before('GET', '/', function()
 //login page
 $router->get('/login', function() 
 {  
-    $controller = new LoginController();
+    $controller = new AuthController();
     $controller->login();
 });
  
 //authentication submit
 $router->post('/auth', function() 
 { 
-    $controller = new LoginController();
+    $controller = new AuthController();
     $controller->auth();
 });
 

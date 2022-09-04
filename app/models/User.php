@@ -1,5 +1,5 @@
 <?php
- 
+declare(strict_types = 1);
 namespace App\models;
 
 use App\lib\Model;
