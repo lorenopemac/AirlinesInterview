@@ -7,7 +7,7 @@ require './vendor/autoload.php';
 //Controllers
 use App\controllers\LoginController;
 use App\controllers\HomeController;
-
+use App\controllers\BookingController;
 
 // Create Router instance
 $router = new \Bramus\Router\Router();
@@ -23,8 +23,8 @@ function checkAuth()
 }
  
 //if already succesfull login redirect home
-$router->before('GET', '/', function() { 
-
+$router->before('GET', '/', function() 
+{  
     if(isset($_SESSION['user'])){ 
         header('location: home');
     }else{
@@ -33,25 +33,24 @@ $router->before('GET', '/', function() {
 });
 
 
-// Define routes
-$router->get('/', function() { 
-    echo "Its Works";
-});
+// Define routes 
 
 //login page
-$router->get('/login', function() {  
+$router->get('/login', function() 
+{  
     $controller = new LoginController();
     $controller->login();
 });
  
 //authentication submit
-$router->post('/auth', function() { 
+$router->post('/auth', function() 
+{ 
     $controller = new LoginController();
     $controller->auth();
 });
 
 
-//home page 
+//home page - seach hotels page 
 $router->get('/home', function() {
     checkAuth();
     $user = unserialize($_SESSION['user']);
@@ -59,14 +58,14 @@ $router->get('/home', function() {
     $controller->index();
 });
 
-//seach page
-$router->get('/hotels', function() {
+
+$router->get('/bookingsearch', function() 
+{ 
     checkAuth();
-    echo 'busca hoteles';
-    //$user = unserialize($_SESSION['user']);
-    //$controller = new HotelController($user);
-    //$controller->index();
+    $controller = new BookingController();
+    echo $controller->search_list_hotels(); 
 });
+
 
 // Run
 $router->run();

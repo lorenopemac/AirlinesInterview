@@ -31,7 +31,7 @@ class LoginController extends Controller{
      * 
      */
     public function auth()
-    {
+    { 
         $username = $_POST["username"];
         $password = $_POST["password"];
         $airline = $_POST["airline"];
