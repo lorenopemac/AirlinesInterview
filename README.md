@@ -19,7 +19,9 @@ A step by step series of examples that tell you how to get a development
 environment running
 
 Steps:
-- Set .env file( is already added to repository).
+- Set .env file.
+  -   PHP_VERSION = 8.1-fpm
+      PUBLIC_PORT = 8080
 - Run on console docker-compose build.
 - Run docker-compose up
 - Ready to start on port localhost:8080
