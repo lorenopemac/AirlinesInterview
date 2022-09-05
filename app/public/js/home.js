@@ -104,7 +104,8 @@ $(document).ready(function(){
                         <div class='card-footer text-muted'>
                             For: `+hotel['nights']+` nights
                         </div>
-                    </div> `
+                    </div>
+                    <br> `
             });
         }else{
             //if hotel data is empty then return message 

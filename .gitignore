@@ -25,3 +25,5 @@
 /vendors/*
 
 *.log
+
+.phpunit.result.cache

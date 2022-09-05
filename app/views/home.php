@@ -7,8 +7,9 @@
     <script type="text/javascript" src="app/public/js/home.js"></script>
 
     <!-- hello message -->
-    <h1><?php echo 'Welcome '.$this->data["user"]->getUsername() ?></h1>
-    
+    <div class="container">  
+        <h3><?php echo 'Welcome '.$this->data["user"]->getUsername() ?></h3>
+    </div>
     <!-- Filter inputs -->
     <div class="container">  
             <div class="form-row">
@@ -18,11 +19,11 @@
                 </div> 
                 <div class="col-2">
                     <label class="form-label" for="fromDate"><Caption>From date</Caption></label>
-                    <input type="date" id="fromDate" class="form-control"  name="checkin" value=""> 
+                    <input type="text" id="fromDate" class="form-control"  name="checkin" value="" autocomplete="off"> 
                 </div>
                 <div class="col-2">
                     <label class="form-label" for="toDate"><Caption>To date</Caption></label>
-                    <input type="date" id="toDate" class="form-control" name="checkout" value=""></p>
+                    <input type="text" id="toDate" class="form-control" name="checkout" value="" autocomplete="off"></p>
                 </div>
                 <div class="col-2">
                     <label class="form-label" for="guests"><Caption>Number of Guests</Caption></label>
