@@ -1,6 +1,6 @@
 # Project Title
 
-ID90travel interview by Lorenzo Peña
+ID90travel interview challenge developed by Lorenzo Peña
 
 ## Getting Started
 
