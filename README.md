@@ -21,7 +21,7 @@ environment running
 Steps:
 - Set .env file.
   -   PHP_VERSION = 8.1-fpm
-      PUBLIC_PORT = 8080
+  -   PUBLIC_PORT = 8080
 - Run on console docker-compose build.
 - Run docker-compose up
 - Ready to start on port localhost:8080
