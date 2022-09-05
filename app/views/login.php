@@ -27,7 +27,7 @@
             <!-- Airline list -->
             <div class="form-outline mb-4">
               <label class="form-label" for="form3Example3">Airline</label>
-              <select  name="airline" class="form-select" aria-label="Default select example">
+              <select  name="airline" class="form-select" aria-label="Default select example" required>
                   <option selected="selected">Choose one</option>
                   <?php  
                       foreach($this->data["airlines"] as $airline){
@@ -41,14 +41,14 @@
             <div class="form-outline mb-4">
                 <label class="form-label" for="form_username">User</label>
                 <input type="text" id="form_username"  name="username"class="form-control form-control-lg"
-                placeholder="Enter a valid user" />
+                placeholder="Enter a valid user" required/>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-3">
                 <label class="form-label" for="form_password">Password</label>
                 <input type="password" id="form_password" name="password" class="form-control form-control-lg"
-                placeholder="Enter password" />
+                placeholder="Enter password" required/>
             </div>
 
             <!-- Checkbox -->
@@ -76,5 +76,4 @@
 </body>
      
 </html>
-
-<?php  echo 'ee';//var_dump($this->data["airlines"]); ?>
+ 

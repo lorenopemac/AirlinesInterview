@@ -1,15 +1,17 @@
 <?php
 declare(strict_types = 1);
+
 namespace App\models;
 
 use App\lib\Model;
+use App\config\Configs;
 
 class User extends Model{
 
     private int $id;
     private string $airline;
     private string $username; 
-    private string $frist_name;
+    private string $first_name;
     private string $last_name;
     private string $email;
 
@@ -32,25 +34,22 @@ class User extends Model{
      * Verify if an user exist using API and return it
      * @param array $data
      */
-    public static function get(array $data) : User
+    public static function get(array $data)
     {
         try{
-            //$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . './config/');
-            //$dotenv->load();
-            //$url = $_ENV['API_LOGIN']; 
             $postdata = json_encode($data);
-            $url = "https://beta.id90travel.com/session.json";
+            $url = Configs::$API_LOGIN;
 
             $curl = curl_init($url); 
             curl_setopt($curl, CURLOPT_POST, true); 
             curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
+            //timeout in seconds
+            curl_setopt($curl, CURLOPT_TIMEOUT, 120); 
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
             $result = curl_exec($curl);
-            curl_close($curl);
-            //echo var_dump((json_decode($result,true)["member"])); 
-            //exit;
+            curl_close($curl); 
+
             if(!curl_errno($curl) && curl_getinfo($curl, CURLINFO_HTTP_CODE)==200)
             {
                 $user = new User(json_decode($result,true)["member"]);
@@ -59,18 +58,40 @@ class User extends Model{
                 return null;
             }
         }catch( Exception $e){
-
+            echo 'Exception: ',  $e->getMessage(), "\n";
         }
     }
 
+    /**
+     * Return username attribute
+     */
     public function getUsername() : string
     {
         return $this->username;
     } 
 
+    /**
+     * Return airline attribute
+     */
     public function getAirline() : string
     {
         return $this->airline;
+    }
+
+    /**
+     * Return first_name attribute
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Return email attribute
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
 }

@@ -1,9 +1,11 @@
 <?php
 declare(strict_types = 1);
+
+
 namespace App\lib;
+
 // Require composer autoloader
 require './vendor/autoload.php';
-
 //Controllers
 use App\controllers\AuthController;
 use App\controllers\HomeController;
@@ -32,8 +34,9 @@ $router->before('GET', '/', function()
     }
 });
 
-
-// Define routes 
+/**
+ *  Define routes  
+ */
 
 //login page
 $router->get('/login', function() 
@@ -49,8 +52,16 @@ $router->post('/auth', function()
     $controller->auth();
 });
 
+//authentication submit
+$router->get('/logout', function() 
+{ 
+    checkAuth();
+    $controller = new AuthController();
+    $controller->logout();
+});
 
-//home page - seach hotels page 
+
+//home page - search hotels page 
 $router->get('/home', function() {
     checkAuth();
     $user = unserialize($_SESSION['user']);
@@ -58,12 +69,12 @@ $router->get('/home', function() {
     $controller->index();
 });
 
-
+// Search hotels
 $router->get('/bookingsearch', function() 
 { 
     checkAuth();
     $controller = new BookingController();
-    echo $controller->search_list_hotels(); 
+    echo $controller->searchListHotels(); 
 });
 
 

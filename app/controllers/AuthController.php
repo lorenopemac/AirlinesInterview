@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\lib\Controller;
 use App\models\User;
+use App\models\Airline;
 
 class AuthController extends Controller{
  
@@ -13,47 +14,65 @@ class AuthController extends Controller{
     }
 
     /**
-     * render login view with airlines 
+     * Render login view with airlines 
      */
     public function login() : void
     {
-        $url = "https://beta.id90travel.com/airlines";
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+        try{
+            $airlines = Airline::getAirlines();
+            $this->render('login',["airlines" => $airlines]);
+        }catch( Exception $e){
+            echo 'Exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $airlines = json_decode($response,true);
-        $this->render('login',["airlines" => $airlines]);
+
+    /**
+     * Logut user and render login page
+     */
+    public function logout() : void
+    {
+        try{ 
+            session_unset();
+            header('location: /login');
+        }catch( Exception $e){
+            echo 'Exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     /**
-     * 
+     * Authentication function for users
+     * @param POST username
+     * @param POST password
+     * @param POST airline
+     * @param POST remember_me
      */
     public function auth() : void
     { 
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $airline = $_POST["airline"];
-        $remember_me = isset($_POST['remember_me']); 
+        try{
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            $airline = $_POST["airline"];
+            $remember_me = isset($_POST['remember_me']); 
 
-        
-        if(!is_null($username) && !is_null($password) && !is_null($airline) && !is_null($remember_me))
-        { 
-            $data = array("username" => $username,"password" => $password,"airline" => $airline,"remember_me" => $remember_me);
-            $user = User::get($data);
-            if($user){
+            
+            if(!is_null($username) && !is_null($password) && !is_null($airline) && !is_null($remember_me))
+            { 
+                $data = array("username" => $username,"password" => $password,"airline" => $airline,"remember_me" => $remember_me);
+                $user = User::get($data);
+                if($user){
+                    
+                    $_SESSION['user'] = serialize($user); 
+                    header('location: /home');
+                }else{ 
+                    header('location: /login');
+                }
                 
-                $_SESSION['user'] = serialize($user); 
-                header('location: /home');
-            }else{
-                error_log('User not exist');
+            }else{ 
                 header('location: /login');
             }
-            
-        }else{
-            error_log('Login incorrect, data is null');
-            header('location: /login');
+        }catch( Exception $e){
+            echo 'Exception: ',  $e->getMessage(), "\n";
         }
     }
  
