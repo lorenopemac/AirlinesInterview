@@ -1,6 +1,4 @@
-ARG php_version 
-
-FROM php:${php_version}
+FROM php:8.1-fpm
 
 # INSTALL ZIP TO USE COMPOSER
 RUN apt-get update && apt-get install -y \
