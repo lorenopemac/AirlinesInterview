@@ -19,7 +19,7 @@ A step by step series of examples that tell you how to get a development
 environment running
 
 Steps:
-    _Set .env file( is already added to repository).
-    _Run on console docker-compose build.
-    _Run docker-compose up
-    _Ready to start on port localhost:8080
+- Set .env file( is already added to repository).
+- Run on console docker-compose build.
+- Run docker-compose up
+- Ready to start on port localhost:8080
