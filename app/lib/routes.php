@@ -38,6 +38,13 @@ $router->before('GET', '/', function()
  *  Define routes  
  */
 
+
+ //login page
+$router->get('/', function() 
+{  
+    header('location: login'); 
+});
+
 //login page
 $router->get('/login', function() 
 {  
